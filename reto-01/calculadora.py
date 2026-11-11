@@ -1,4 +1,4 @@
-from tkinter import Text, Tk , Button
+from tkinter import Button, Text, Tk
 
 
 class Interfaz:
@@ -40,6 +40,16 @@ class Interfaz:
             boton13, boton14, boton15, boton16,
             boton17
         ]
+        contador = 0
+        for i in range(1,5):
+            for j in range(4):
+                botones[contador].grid(row=i, column=j, padx=5, pady=5)
+                contador += 1
+                
+        #Ubicar boton de igualdad
+        botones[-1].grid(row=5,column=0,columnspan=4)
+    def crearBoton(self,valor, escribir=True, ancho=9, alto=1):
+        return Button(self.ventana, text=valor, width=ancho, height=alto, font=("Helvetica", 15),command=lambda: self.click(valor,escribir))
 ventana_principal = Tk()
 calculadora = Interfaz(ventana_principal)
 ventana_principal.mainloop()
