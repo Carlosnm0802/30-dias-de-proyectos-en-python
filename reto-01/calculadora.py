@@ -1,4 +1,4 @@
-from tkinter import Button, Text, Tk
+from tkinter import Button, Text, Tk, END, re
 
 
 class Interfaz:
@@ -21,7 +21,7 @@ class Interfaz:
         boton5= self.crearBoton(4)
         boton6= self.crearBoton(5)
         boton7= self.crearBoton(6)
-        boton8= self.crearBoton(u"\u00F7",escribir=False) 
+        boton8= self.crearBoton(u"\u00F7",escribir=True) 
         boton9 = self.crearBoton(1) 
         boton10 = self.crearBoton(2)
         boton11 = self.crearBoton(3)
@@ -48,8 +48,35 @@ class Interfaz:
                 
         #Ubicar boton de igualdad
         botones[-1].grid(row=5,column=0,columnspan=4)
+        
     def crearBoton(self,valor, escribir=True, ancho=9, alto=1):
         return Button(self.ventana, text=valor, width=ancho, height=alto, font=("Helvetica", 15),command=lambda: self.click(valor,escribir))
+    
+    def click(self, valor, escribir):
+        if not escribir:
+            if valor == "=" and self.operacion != "":
+                self.operacion = re.sub(u"\u00F7", "/",self.operacion) 
+                resultado = str(eval(self.operacion))
+                self.operacion = ""
+                self.limpiarPantalla()
+                self.mostrarenPantalla(resultado)
+            elif valor == u"\u232b": #Borrar
+                self.operacion = ""
+                self.limpiarPantalla()
+        else:
+            self.operacion += str(valor)
+            self.mostrarenPantalla(valor)
+                
+    def limpiarPantalla(self):
+        self.pantalla.configure(state="normal")
+        self.pantalla.delete("1.0",END)
+        self.pantalla.configure(state="disabled")
+        
+    def mostrarenPantalla(self,valor):
+        self.pantalla.configure(state="normal")
+        self.pantalla.insert("end", valor)
+        self.pantalla.configure(state="disabled")
+        
 ventana_principal = Tk()
 calculadora = Interfaz(ventana_principal)
 ventana_principal.mainloop()
