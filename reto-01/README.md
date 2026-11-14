@@ -10,6 +10,8 @@ Desde la raíz del repositorio:
 python reto-01/calculadora.py
 ```
 
+También puedes ejecutar la segunda versión con `python reto-01/calculadora2.py`. Esta utiliza una etiqueta para la pantalla y muestra un mensaje si la operación no es válida.
+
 Se necesita Python con soporte para Tkinter. Para comprobarlo, ejecuta `python -m tkinter`: debería abrirse una ventana de prueba. En macOS, si usas Python 3.14 de Homebrew y falta `_tkinter`, puedes instalarlo con `brew install python-tk@3.14`.
 
 ## Cómo funciona
@@ -24,4 +26,4 @@ La pantalla está deshabilitada para evitar que se escriba directamente en ella.
 
 ## Aspectos por mejorar
 
-La calculadora todavía no maneja expresiones inválidas ni divisiones entre cero, por lo que pueden aparecer errores en la terminal. Además, `eval` ejecuta expresiones de Python: para una versión más segura conviene reemplazarlo por operaciones explícitas y validar la entrada.
+La primera versión todavía no maneja expresiones inválidas ni divisiones entre cero, por lo que pueden aparecer errores en la terminal. Además, ambas versiones usan `eval`, que ejecuta expresiones de Python: para una versión más segura conviene reemplazarlo por operaciones explícitas y validar la entrada.
